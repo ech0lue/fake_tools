@@ -20,6 +20,7 @@
         
         #content {
             display: none;
+            width: 100vw;
         }
         
         .text {
@@ -28,6 +29,7 @@
             color: grey;
             font-weight: 700;
             line-height: 100vh;
+            width: 100vw;
         }
         
         @keyframes moves {
@@ -39,20 +41,19 @@
             }
         </style>
         <script type="text/javascript">
-        function open() {
-            var x = document.getElementById('cover');
-            var y = document.getElementById('content');
-            x.style.animation = 'moves 2s ease-out';
+        function slide() {
+            var cover = document.getElementById('cover');
+            var content = document.getElementById('content');
+            cover.style.animation = 'moves 2s ease-out';
             setTimeout("cover.style.display = 'none'", 2000);
-            var y=document.getElementById('content');
-        	y.style.display='block';
+        	content.style.display='block';
         }
         
         </script>
     </head>
 
     <body>
-        <div id="cover" onclick="open()">
+        <div id="cover" onclick="slide()">
             <div class="text">That's all</div>
         </div>
         <div id="content">
