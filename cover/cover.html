@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>cover</title>
+        <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            transition: all 2s;
+        }
+        
+        #cover {
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            background-color: black;
+        }
+        
+        #content {
+            display: none;
+        }
+        
+        .text {
+            text-align: center;
+            font-size: 40px;
+            color: grey;
+            font-weight: 700;
+            line-height: 100vh;
+        }
+        
+        @keyframes moves {
+            0% {
+                bottom: 0;
+            }
+            100% {
+                bottom: 100vh;
+            }
+        </style>
+        <script type="text/javascript">
+        function open() {
+            var x = document.getElementById('cover');
+            var y = document.getElementById('content');
+            x.style.animation = 'moves 2s ease-out';
+            setTimeout("cover.style.display = 'none'", 2000);
+            var y=document.getElementById('content');
+        	y.style.display='block';
+        }
+        
+        </script>
+    </head>
+
+    <body>
+        <div id="cover" onclick="open()">
+            <div class="text">That's all</div>
+        </div>
+        <div id="content">
+            <div class="text">FUCK YOU</div>
+        </div>
+    </body>
+
+    </html>
