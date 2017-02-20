@@ -14,6 +14,7 @@
         position: relative;
         left: calc(50vw - 150px);
         width: 300px;
+        height: 200px;
         overflow: hidden;
     }
     
@@ -21,7 +22,7 @@
         position: relative;
         width: 1000px;
         height: 200px;
-        transition: all 2s;
+        transition: all 1s;
     }
     
     .img {
@@ -57,11 +58,18 @@
         display: inline-block;
         text-decoration: none;
         position: absolute;
-        top: 90px;
+        bottom: 0px;
+        width: 40px;
+        height: 100%;
+        background-color: rgba(120,120,120,0.4);
+        line-height: 200px;
+        text-align: center;
     }
-    
+    a:hover{
+    	background-color: rgba(120,120,120,0.7);
+    }
     a#next {
-        left: 290px;
+        left: 260px;
     }
     </style>
     <script type="text/javascript">
@@ -167,8 +175,8 @@
 
         function play() {
             flagPlay = setInterval(function() {
-                nex.onclick(), 2000
-            });
+                nex.onclick()
+            }, 1500);
         }
         //给个flag，这样方便定点清除setInerval（）
         function stop() {
@@ -184,7 +192,7 @@
                 pointers[flagPointers - 1].className = 'on';
 			}
 		}
-        //play();
+        play();
     }
     </script>
 </head>
@@ -202,11 +210,12 @@
         </div>
         <a href="javascript:;" class="director" id="pre">&lt;</a>
         <a href="javascript:;" class="director" id="next">&gt;</a>
-        alert:因为本地文件chrome和firefox对setInterval()函数有点鬼畜效果所以关掉了自动播放，所以把鼠标移上去再移开就能看到效果。<br/><br/>
-        todo:1.把事件绑定改成DOM 2级事件，我在想毕竟2级事件绑定里参数里函数只写句柄不要参数，所以外面需要再套一层函数。会增加载入时消耗的资源来降低耦合程度，值不值？<br/>2.那个pointers的click事件还需要再优化一下，不过暂时没想到怎么弄。
-        3.从动画分析的话，到头后是直接倒回去，可以考虑把lists里做成一个3D的棱柱转起来，这样可以少不少东西。但是旋转角度一直加的话，会不会突破JS的上限然后GG啊？？？<br/>
+        
 
     </div>
+    <br/><br/>
+    todo:1.把事件绑定改成DOM 2级事件，我在想毕竟2级事件绑定里参数里函数只写句柄不要参数，所以外面需要函数。会增加载入时消耗的资源来降低耦合程度，值不值？<br/>2.那个pointers的click事件还需要再优化一下，不过暂时没想到怎么弄。
+    3.从动画分析的话，到头后是直接倒回去，可以考虑把lists里做成一个3D的棱柱转起来，这样可以少不少东西转角度一直加的话，会不会突破JS的上限然后GG啊？？？<br/>
 </body>
 
 </html>
