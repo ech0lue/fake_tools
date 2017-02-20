@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>carousel</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    #container {
+        position: relative;
+        left: calc(50vw - 150px);
+        width: 300px;
+        overflow: hidden;
+    }
+    
+    #lists {
+        position: relative;
+        width: 1000px;
+        height: 200px;
+        transition: all 2s;
+    }
+    
+    .img {
+        width: 298px;
+        height: 198px;
+        background-color: #33b5e5;
+        display: inline-block;
+        border: solid black 1px;
+    }
+    
+    #pointers {
+        position: relative;
+        width: 45px;
+        left: 130px;
+        bottom: 20px;
+    }
+    
+    span {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: solid black 1px;
+        border-radius: 50%;
+        z-index: 2;
+        cursor: pointer;
+    }
+    
+    span.on {
+        background-color: #33be55;
+    }
+    
+    a {
+        display: inline-block;
+        text-decoration: none;
+        position: absolute;
+        top: 90px;
+    }
+    
+    a#next {
+        left: 290px;
+    }
+    </style>
+    <script type="text/javascript">
+    var eventHandler = {
+
+        addHandler: function(element, type, handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type, handler, false)
+            } else if (element.attachEventListener) {
+                element.attachEventListener('on' + type, handler)
+            } else {
+                element['on' + type] = handler
+            }
+        }
+
+
+    }
+
+    window.onload = function() {
+        var lists = document.getElementById('lists');
+        var pre = document.getElementById('pre');
+        var nex = document.getElementById('next');
+        var container = document.getElementById('container');
+        var flagPlay;
+        var flagPointers = 1;
+        var pointers = document.getElementsByTagName('span');
+        //整个页面里只有一处有<span>所以才这么搞，否则的话要document.getElementById('父元素的ID'.document.getElementsByTagName('span'))
+
+        function animate(argument) {
+            var neoLeft = parseInt(lists.offsetLeft) + parseInt(argument);
+            //直接parseInt(element.style.left)的结果是NaN
+
+            lists.style.left = neoLeft + 'px';
+            if (neoLeft > 0) {
+                lists.style.left = (neoLeft - 900) + 'px';
+            }
+            if (neoLeft < -600) {
+                lists.style.left = (neoLeft + 900) + 'px';
+            }
+            //弄个类似循环的出来，因为起作用的是neoLeft，所以操作neoLeft就行了
+
+        }
+
+        pre.onclick = function() {
+
+            if (flagPointers < 0) {
+                flagPointers = pointers.length;
+            }
+            flagPointers -= 1;
+            animate(300);
+
+            pointersShow();
+
+
+        }
+        nex.onclick = function() {
+
+            if (flagPointers > 3) {
+                flagPointers = 0;
+            }
+            flagPointers += 1;
+            animate(-300);
+            pointersShow();
+
+        }
+        pointers[0].onclick=function () {
+        	lists.style.left='0px';
+        	for (var i = 0; i <= pointers.length; ++i) {
+                
+                    pointers[i].className = null;
+                
+                pointers[0].className='on';
+            }
+            
+        }
+        pointers[1].onclick=function () {
+        	lists.style.left='-300px';
+        	for (var i = 0; i <= pointers.length; ++i) {
+               
+                    pointers[i].className = null;
+                
+               	pointers[1].className='on'
+            }
+            
+        }
+        pointers[2].onclick=function(){
+        	lists.style.left='-600px';
+        	for (var i = 0; i <= pointers.length; ++i) {
+                
+                    pointers[i].className = null;
+                
+                pointers[2].className='on';
+            }
+            
+        }
+        container.onmouseover = function() {
+            stop();
+        }
+
+        container.onmouseout = function() {
+            play();
+        }
+
+        function play() {
+            flagPlay = setInterval(function() {
+                nex.onclick(), 2000
+            });
+        }
+        //给个flag，这样方便定点清除setInerval（）
+        function stop() {
+            clearInterval(flagPlay);
+        }
+
+
+        function pointersShow() {
+            for (var i = 0; i <= pointers.length; ++i) {
+                
+                    pointers[i].className = null;
+                
+                pointers[flagPointers - 1].className = 'on';
+			}
+		}
+        //play();
+    }
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="lists">
+            <div class="img">1</div><div class="img" style="background-color: orange">2</div><div class="img" style="background-color: yellow">3</div>
+            <!这里是一行是为了清除inline-block元素间的空隙>
+        </div>
+        <div id="pointers">
+            <span class="on" id="pointer1"> </span>
+            <span id="pointer2"> </span>
+            <span id="pointer3"> </span>
+        </div>
+        <a href="javascript:;" class="director" id="pre">&lt;</a>
+        <a href="javascript:;" class="director" id="next">&gt;</a>
+        alert:因为本地文件chrome和firefox对setInterval()函数有点鬼畜效果所以关掉了自动播放，所以把鼠标移上去再移开就能看到效果。<br/><br/>
+        todo:1.把事件绑定改成DOM 2级事件，我在想毕竟2级事件绑定里参数里函数只写句柄不要参数，所以外面需要再套一层函数。会增加载入时消耗的资源来降低耦合程度，值不值？<br/>2.那个pointers的click事件还需要再优化一下，不过暂时没想到怎么弄。
+        3.从动画分析的话，到头后是直接倒回去，可以考虑把lists里做成一个3D的棱柱转起来，这样可以少不少东西。但是旋转角度一直加的话，会不会突破JS的上限然后GG啊？？？<br/>
+
+    </div>
+</body>
+
+</html>
