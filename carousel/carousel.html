@@ -89,6 +89,7 @@
     }
 
     window.onload = function() {
+    	alert('有大手子的话还请按F12然后选控制台，我不知道怎么解决那些error，虽然这个页面跑起来了，不过巨消耗资源')
         var lists = document.getElementById('lists');
         var pre = document.getElementById('pre');
         var nex = document.getElementById('next');
@@ -139,7 +140,7 @@
         	lists.style.left='0px';
         	for (var i = 0; i <= pointers.length; ++i) {
                 
-                    pointers[i].className = null;
+                    pointers[i].className = '';
                 
                 pointers[0].className='on';
             }
@@ -149,7 +150,7 @@
         	lists.style.left='-300px';
         	for (var i = 0; i <= pointers.length; ++i) {
                
-                    pointers[i].className = null;
+                    pointers[i].className = '';
                 
                	pointers[1].className='on'
             }
@@ -159,7 +160,7 @@
         	lists.style.left='-600px';
         	for (var i = 0; i <= pointers.length; ++i) {
                 
-                    pointers[i].className = null;
+                    pointers[i].className = '';
                 
                 pointers[2].className='on';
             }
@@ -187,7 +188,7 @@
         function pointersShow() {
             for (var i = 0; i <= pointers.length; ++i) {
                 
-                    pointers[i].className = null;
+                    pointers[i].className = '';
                 
                 pointers[flagPointers - 1].className = 'on';
 			}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>carousel via css</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<style>
+		*{padding: 0;margin: 0;}
+		.out{
+			width: 900px;
+			height: 300px;
+			margin: 20px auto;
+			overflow: hidden;
+			text-align: center;
+		}
+		.con{
+			width: 3300px;
+			height: 300px;
+			overflow: hidden;
+			animation: move 8s linear infinite normal;
+			animation-fill-mode:forwards;
+		}
+		.con:hover{
+			animation-play-state:paused;
+			
+		}
+		.con div{
+			display: inline-block;
+			
+			overflow: hidden;
+			width: 300px;
+			height: 300px;
+		}
+		.div1{
+			background-color: red;
+		}
+		.div2{
+			background-color: orange;
+		}
+		.div3{
+			background-color: yellow;
+		}
+		.div4{
+			background-color: green;
+		}
+		.div5{
+			background-color: lime;
+		}
+		.div6{
+			background-color: blue;
+		}
+		.div7{
+			background-color: purple;
+		}
+		.div8{
+			background-color: black;
+		}
+
+
+		.pause{
+			position: relative;
+			height: 60px;
+			display: inline-block;
+			margin: 20px auto;
+			text-align: center;
+		}
+		.pause:before{
+			position: absolute;
+			content: "暂停";
+			display: inline-block;
+			width: 100px;
+			height: 60px;
+			left: 0px;
+			line-height: 60px;
+			font-size: 20px;
+			color: #fff;
+			margin: 0 20px;
+			background: orange;
+			border: none;
+			border-radius: 20px;
+			outline: none;
+		}
+
+		@keyframes move{
+			0%{transform:translateX(0px);}
+			100%{transform:translateX(-2400px);}
+		}
+		.out input{
+			display: none;
+		}
+		.out input:checked ~ .con{
+			animation-play-state:paused;
+			
+		}
+		.out input:checked ~ .pause:before{
+			content: "滚动";
+		}
+		.content{
+			width: 900px;
+			height: 300px;
+			margin: 20px auto;
+			text-align: justify;
+		}
+	</style>
+</head>
+<body>
+	<div class="out">
+		<input id="ipt1" type="checkbox" name="" value="">
+		<label for="ipt1" class="pause">
+		</label>
+		<div class="con">
+			<div class="div1"></div><div class="div2"></div><div class="div3"></div><div class="div4"></div><div class="div5"></div><div class="div6"></div><div class="div7"></div><div class="div6"></div><div class="div1"></div><div class="div2"></div><div class="div3"></div>
+		</div>
+	</div>
+	<div class="content">当前兼容性：<br/>桌面端IE10或者更新版本，Chrome43或者更新版本，Firefox16或者更新版本，不想说了，反正不管什么平台，最新的就对了<br/>动画的连续性用了animation-fill-mode:forwards，动画结束后会保留最后一帧直到动画再次开始<br/>动画的停止和继续播放用的是animation-play-state:running|paused。<br/>这里面有一个display:none的input type='checkbox' id='ipt1'，然后有一个lable for 'ipt1'来控制那个checkbox，点击这个lable，浏览器会自动focus到那个checkbox上。lable:before的content是'暂停'，然后.out input:checked ~ .con{animation-play-state:paused;}，点击那个lable，那个checkbox有一个:checked，这时.con的动画停止。同时把lable:before的content变成'滚动'（至于再点发生的事，我对lable这个标签也不熟悉啊）<br/><br/>至于和前面那篇里多了的那些小点点，可以用类似的手法制造假点击，，不过没细想，有空了补上，争取不用JS实现。</div>
+
+	<script>
+		/*var con=document.querySelector('.con');
+		var control=document.getElementsByTagName('button');
+		var state=true;
+		var direction=true;
+		control[0].onclick=function(){
+			if(state){
+				this.innerHTML="滚动";
+				con.style.animationPlayState="paused";
+				state=false;
+			}else{
+				this.innerHTML="暂停";
+				con.style.animationPlayState="running";
+				state=true;
+			}		
+		}*/
+	</script>
+</body>
+</html>
