@@ -113,7 +113,11 @@
 			<div class="div1"></div><div class="div2"></div><div class="div3"></div><div class="div4"></div><div class="div5"></div><div class="div6"></div><div class="div7"></div><div class="div6"></div><div class="div1"></div><div class="div2"></div><div class="div3"></div>
 		</div>
 	</div>
-	<div class="content">当前兼容性：<br/>桌面端IE10或者更新版本，Chrome43或者更新版本，Firefox16或者更新版本，不想说了，反正不管什么平台，最新的就对了<br/>动画的连续性用了animation-fill-mode:forwards，动画结束后会保留最后一帧直到动画再次开始<br/>动画的停止和继续播放用的是animation-play-state:running|paused。<br/>这里面有一个display:none的input type='checkbox' id='ipt1'，然后有一个lable for 'ipt1'来控制那个checkbox，点击这个lable，浏览器会自动focus到那个checkbox上。lable:before的content是'暂停'，然后.out input:checked ~ .con{animation-play-state:paused;}，点击那个lable，那个checkbox有一个:checked，这时.con的动画停止。同时把lable:before的content变成'滚动'（至于再点发生的事，我对lable这个标签也不熟悉啊）<br/><br/>至于和前面那篇里多了的那些小点点，可以用类似的手法制造假点击，，不过没细想，有空了补上，争取不用JS实现。</div>
+	<div class="content">
+		当前兼容性：<br/>桌面端IE10或者更新版本，Chrome43或者更新版本，Firefox16或者更新版本，不想说了，反正不管什么平台，最新的就对了<br/>动画的连续性用了animation-fill-mode:forwards，动画结束后会保留最后一帧直到动画再次开始<br/>动画的停止和继续播放用的是animation-play-state:running|paused。<br/>这里面有一个display:none的input type='checkbox' id='ipt1'，然后有一个lable for 'ipt1'来控制那个checkbox，点击这个lable，浏览器会自动focus到那个checkbox上。lable:before的content是'暂停'，然后.out input:checked ~ .con{animation-play-state:paused;}，点击那个lable，那个checkbox有一个:checked，这时.con的动画停止。同时把lable:before的content变成'滚动'（至于再点发生的事，我对lable这个标签也不熟悉啊）<br/><br/>至于和前面那篇里多了的那些小点点，可以用类似的手法制造假点击，，不过没细想，有空了补上，争取不用JS实现。</div>
+	<div class="content">
+		想了一下，毕竟用css也能造出点击事件，而且还不用考虑事件流的其他东西，所以用纯粹的CSS也能做得和前面那个一样。不过就是每个小点点都要重新写一套动画给.con用
+	</div>
 
 	<script>
 		console.log('里面真的没有有用的JS')
